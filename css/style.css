@@ -3,17 +3,58 @@
 }
 
 body {
+  margin: 0;
   background-color: #fefae0;
+  grid-template-columns: ;
   color: #071e22;
 }
 
 .main-wrapper {
-  width: 80vw;
+  width: 95vw;
   margin: 0 auto;
   background-color: #faedcd;
-  padding-top: 20px;
 }
 
-h1 {
-  text-align: center;
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.3fr 0.2fr 2fr;
+  gap: 0.5em 0.5em;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "Title Title Title Title Title"
+    "Player Player . Computer Computer"
+    "Player-Deck Player-Card Text Computer-Card Computer-Deck";
+}
+
+.Player {
+  grid-area: Player;
+}
+
+.Title {
+  grid-area: Title;
+}
+
+.Computer {
+  grid-area: Computer;
+}
+
+.Player-Deck {
+  grid-area: Player-Deck;
+}
+
+.Player-Card {
+  grid-area: Player-Card;
+}
+
+.Computer-Card {
+  grid-area: Computer-Card;
+}
+
+.Computer-Deck {
+  grid-area: Computer-Deck;
+}
+
+.Text {
+  grid-area: Text;
 }
