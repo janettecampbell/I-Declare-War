@@ -10,6 +10,19 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+img {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.deck-number {
+  position: absolute;
+  margin: 91px 0 0 64px;
+  font-size: 11rem;
+  color: #fff;
+  text-shadow: 7px 7px 20px #000;
+}
+
 .main-wrapper {
   width: 95vw;
   margin: 0 auto;
