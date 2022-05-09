@@ -11,14 +11,13 @@ body {
 }
 
 img {
-  margin-left: 20px;
-  margin-right: 20px;
+  max-width: 100%;
+  height: auto;
 }
 
 .deck-number {
   position: absolute;
-  margin: 91px 0 0 64px;
-  font-size: 11rem;
+  font-size: 11vw;
   color: #fff;
   text-shadow: 7px 7px 20px #000;
   user-select: none;
@@ -60,6 +59,10 @@ img {
 
 .player-deck {
   grid-area: player-deck;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1vw;
 }
 
 .player-card {
@@ -72,6 +75,10 @@ img {
 
 .computer-deck {
   grid-area: computer-deck;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1vw;
 }
 
 .text {

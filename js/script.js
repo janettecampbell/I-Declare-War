@@ -1,5 +1,9 @@
 "use strict";
 
+// Button text
+const play = document.querySelector(".play");
+play.textContent = "PLAY";
+
 // Make a deck of 52 cards
 const suits = ["club", "diamond", "heart", "spade"];
 const values = [
@@ -12,10 +16,10 @@ const values = [
   "8",
   "9",
   "10",
-  "J",
-  "Q",
-  "K",
-  "A",
+  "11",
+  "12",
+  "13",
+  "14",
 ];
 
 // creates a dec of cards from variables
@@ -61,10 +65,11 @@ const dealHand = () => {
 dealHand();
 console.log(playerHand);
 console.log(computerHand);
+
 // select "top" cards to play each round
 const flipCards = () => {
-  let playerCard = playerHand[currentCard];
-  let computerCard = computerHand[currentCard];
+  const playerCard = playerHand[currentCard];
+  const computerCard = computerHand[currentCard];
   console.log(
     `player flips ${playerCard.value}${playerCard.suit} computer flips ${computerCard.value}${computerCard.suit}`
   );
@@ -72,6 +77,24 @@ const flipCards = () => {
 flipCards();
 
 // highest card wins
+const winner = () => {
+  const playerCard = playerHand[currentCard];
+  const computerCard = computerHand[currentCard];
+
+  console.log(playerCard);
+  console.log(computerCard);
+  if (Number(playerCard.value) > Number(computerCard.value)) {
+    console.log("Player wins");
+  } else if (Number(computerCard.value) > Number(playerCard.value)) {
+    console.log("Computer wins");
+  } else {
+    console.log("TBD");
+  }
+};
+
+winner();
+
+//
 // put cards back in winners deck in random position
 // in event of a tie add 4 cards from each player continue until there is not a tie
 // winner of tie takes all cards
