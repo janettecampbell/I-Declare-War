@@ -67,10 +67,18 @@ img {
 
 .player-card {
   grid-area: player-card;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1vw;
 }
 
 .computer-card {
   grid-area: computer-card;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1vw;
 }
 
 .computer-deck {
@@ -83,4 +91,8 @@ img {
 
 .text {
   grid-area: text;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

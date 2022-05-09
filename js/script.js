@@ -74,16 +74,21 @@ const flipCards = () => {
   const computerCard = computerDeck[0];
 
   // declare elements
-  const playerCardShow = document.querySelector("player-card");
-  const computerCardShow = document.querySelector("computer-card");
+  const playerCardShow = document.querySelector(".player-card");
+  const computerCardShow = document.querySelector(".computer-card");
   const playerImg = document.createElement("img");
   const computerImg = document.createElement("img");
 
   // link images
-  playerImg.src = `./images/${playerCard.suit}-${playerCard.value}.png"`;
+  playerImg.src = `./images/${playerCard.suit}-${playerCard.value}.png`;
+  //   playerImg.setAttribute(
+  //     "src",
+  //     "./images/${playerCard.suit}-${playerCard.value}.png"
+  //   );
   computerImg.src = `./images/${computerCard.suit}-${computerCard.value}.png`;
   console.log(playerImg);
   console.log(computerImg);
+  console.log(playerCardShow);
 
   // show card in page
   playerCardShow.appendChild(playerImg);
@@ -97,18 +102,27 @@ flipCards();
 
 // highest card wins
 const winner = () => {
+  const playerCard = playerDeck[0];
+  const computerCard = computerDeck[0];
   console.log(playerCard);
   console.log(computerCard);
+
+  //declare elements
+  const text = document.querySelector(".text");
+
   if (Number(playerCard.value) > Number(computerCard.value)) {
     console.log("Player wins");
+    text.textContent = "Player Wins";
   } else if (Number(computerCard.value) > Number(playerCard.value)) {
     console.log("Computer wins");
+    text.textContent = "Computer Wins";
   } else {
     console.log("TBD");
+    text.textContent = "I Declare War!!";
   }
 };
 
-// winner();
+winner();
 
 // put cards back in winners deck in random position
 const placeWinnerCards = (winnerDeck, numOfCards) => {
