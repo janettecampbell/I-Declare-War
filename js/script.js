@@ -100,6 +100,30 @@ const flipCards = () => {
 };
 flipCards();
 
+// put cards back in winners deck in random position
+const placeWinnerCards = (winnerDeck, numOfCards) => {
+  for (let i = 0; i < numOfCards / 2; ++i) {
+    winnerDeck.splice(
+      Math.trunc(Math.random) * winnerDeck.length,
+      0,
+      playerDeck[0]
+    );
+    winnerDeck.splice(
+      Math.trunc(Math.random) * winnerDeck.length,
+      0,
+      computerDeck[0]
+    );
+
+    // const random = winnerDeck[Math.trunc(Math.random() * 26)];
+  }
+};
+
+//remove cards from both decks
+const removeCards = () => {
+  playerDeck.shift();
+  computerDeck.shift();
+};
+
 // highest card wins
 const winner = () => {
   const playerCard = playerDeck[0];
@@ -113,9 +137,17 @@ const winner = () => {
   if (Number(playerCard.value) > Number(computerCard.value)) {
     console.log("Player wins");
     text.textContent = "Player Wins";
+    placeWinnerCards(playerDeck, 2);
+    removeCards();
+    console.log(playerDeck);
+    console.log(computerDeck);
   } else if (Number(computerCard.value) > Number(playerCard.value)) {
     console.log("Computer wins");
     text.textContent = "Computer Wins";
+    placeWinnerCards(computerDeck, 2);
+    removeCards();
+    console.log(playerDeck);
+    console.log(computerDeck);
   } else {
     console.log("TBD");
     text.textContent = "I Declare War!!";
@@ -124,13 +156,6 @@ const winner = () => {
 
 winner();
 
-// put cards back in winners deck in random position
-const placeWinnerCards = (winnerDeck, numOfCards) => {
-  for (let i = 0; i < numOfCards; ++i) {
-    // winnerDeck.splice(Math.trunc(Math.random) * winnerDeck.length, 0);
-    // const random = winnerDeck[Math.trunc(Math.random() * 26)];
-  }
-};
 // in event of a tie add 4 cards from each player continue until there is not a tie
 // winner of tie takes all cards
 // player with all the cards wins
