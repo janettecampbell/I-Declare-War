@@ -4,7 +4,7 @@
 const play = document.querySelector(".play");
 play.textContent = "PLAY";
 
-// Make a deck of 52 cards
+// - Make a 52 card deck
 const suits = ["club", "diamond", "heart", "spade"];
 const values = [
   "2",
@@ -34,7 +34,7 @@ const getDeck = () => {
   return deck;
 };
 
-// "Shuffle" the deck
+// - Shuffle the deck
 const shuffle = (deck) => {
   // for 1000 turns
   // switch the values of two random cards
@@ -56,20 +56,39 @@ console.log(deck);
 let playerDeck;
 let computerDeck;
 let currentCard;
+const playing = true;
 
+// - Split the deck into 26 cards.
 const dealDecks = () => {
   playerDeck = deck.slice(0, 26);
   computerDeck = deck.slice(26);
-  currentCard = 0;
 };
+
 dealDecks();
 console.log(playerDeck);
 console.log(computerDeck);
 
-// select "top" cards to play each round
+// - Flip cards
 const flipCards = () => {
-  const playerCard = playerDeck[currentCard];
-  const computerCard = computerDeck[currentCard];
+  const playerCard = playerDeck[0];
+  const computerCard = computerDeck[0];
+
+  // declare elements
+  const playerCardShow = document.querySelector("player-card");
+  const computerCardShow = document.querySelector("computer-card");
+  const playerImg = document.createElement("img");
+  const computerImg = document.createElement("img");
+
+  // link images
+  playerImg.src = `./images/${playerCard.suit}-${playerCard.value}.png"`;
+  computerImg.src = `./images/${computerCard.suit}-${computerCard.value}.png`;
+  console.log(playerImg);
+  console.log(computerImg);
+
+  // show card in page
+  playerCardShow.appendChild(playerImg);
+  computerCardShow.appendChild(computerImg);
+
   console.log(
     `player flips ${playerCard.value}${playerCard.suit} computer flips ${computerCard.value}${computerCard.suit}`
   );
@@ -78,9 +97,6 @@ flipCards();
 
 // highest card wins
 const winner = () => {
-  const playerCard = playerDeck[currentCard];
-  const computerCard = computerDeck[currentCard];
-
   console.log(playerCard);
   console.log(computerCard);
   if (Number(playerCard.value) > Number(computerCard.value)) {
@@ -92,15 +108,23 @@ const winner = () => {
   }
 };
 
-winner();
+// winner();
 
 // put cards back in winners deck in random position
 const placeWinnerCards = (winnerDeck, numOfCards) => {
   for (let i = 0; i < numOfCards; ++i) {
-    // const random1 = winnerDeck[Math.trunc(Math.random() * 26)];
+    // winnerDeck.splice(Math.trunc(Math.random) * winnerDeck.length, 0);
+    // const random = winnerDeck[Math.trunc(Math.random() * 26)];
   }
 };
 // in event of a tie add 4 cards from each player continue until there is not a tie
 // winner of tie takes all cards
 // player with all the cards wins
 // If time add images in place of words.
+
+// - Flip cards
+// - Highest card wins
+// - Add cards to winners deck (random positions)
+// - When tie pull 4 cards from deck flip top card winner takes all cards
+// - Add cards to winners deck (random positions)
+// - play until one player runs out of cards
