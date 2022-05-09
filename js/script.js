@@ -62,7 +62,15 @@ dealHand();
 console.log(playerHand);
 console.log(computerHand);
 // select "top" cards to play each round
+const flipCards = () => {
+  let playerCard = playerHand[currentCard];
+  let computerCard = computerHand[currentCard];
+  console.log(
+    `player 1 flips ${playerCard[currentCard]}${playerCard[currentCard]} computer flips ${computerCard}`
+  );
+};
 
+flipCards();
 // highest card wins
 // put cards back in winners deck in random position
 // in event of a tie add 4 cards from each player continue until there is not a tie

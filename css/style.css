@@ -21,6 +21,7 @@ img {
   font-size: 11rem;
   color: #fff;
   text-shadow: 7px 7px 20px #000;
+  user-select: none;
 }
 
 .main-wrapper {
