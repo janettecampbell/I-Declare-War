@@ -66,11 +66,11 @@ const flipCards = () => {
   let playerCard = playerHand[currentCard];
   let computerCard = computerHand[currentCard];
   console.log(
-    `player 1 flips ${playerCard[currentCard]}${playerCard[currentCard]} computer flips ${computerCard}`
+    `player flips ${playerCard.value}${playerCard.suit} computer flips ${computerCard.value}${computerCard.suit}`
   );
 };
-
 flipCards();
+
 // highest card wins
 // put cards back in winners deck in random position
 // in event of a tie add 4 cards from each player continue until there is not a tie
