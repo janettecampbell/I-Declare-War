@@ -1,6 +1,7 @@
 # I Declare War Card Game
 
-##Wireframe
+## Wireframe
+
 ![alt text](https://github.com/PotstickerNut/I-Declare-War/blob/main/images/wireframe.jpg?raw=true)
 
 ##
