@@ -177,32 +177,32 @@ const winner = () => {
     computerWins(2);
   } else {
     // in event of a tie add 4 cards from each player continue until there is not a tie
-    count = 0;
-    while (Number(playerCard.value) === Number(computerCard.value)) {
+    const text = document.querySelector(".text");
+    const warBtn = document.createElement("button");
+    warBtn.className = "war-button";
+    let tieCount = 1;
     console.log("I Declare War");
-    flipCards(3);
-    removeCards();
-    clear();
-    ++count
-
-    if (Number(playerCard.value) > Number(computerCard.value)) {
-      playerWins(8*count);
-    } else if (Number(computerCard.value) > Number(playerCard.value)) {
-      computerWins(8*count);
-    }
+    text.appendChild(warBtn);
+    warBtn.textContent = "War Button";
+    text.textContent = "I Declare War!!!";
+    // if (Number(playerCard.value) > Number(computerCard.value)) {
+    //   playerWins(8 * tieCount);
+    // } else if (Number(computerCard.value) > Number(playerCard.value)) {
+    //   computerWins(8 * tieCount);
+    // } else {
+    //   while (Number(playerCard.value) === Number(computerCard.value)) {
+    //     flipCards(tieCount * 4);
+    //     clear();
+    //     ++tieCount;
+    //   }
+    // }
   }
 };
 
 // winner of tie takes all cards
 // player with all the cards wins
-// If time add images in place of words.
-
-// - Flip cards
-// - Highest card wins
-// - Add cards to winners deck (random positions)
 // - When tie pull 4 cards from deck flip top card winner takes all cards
 // - Add cards to winners deck (random positions)
-// - play until one player runs out of cards
 const playBtn = document.querySelector(".play");
 
 playBtn.addEventListener("click", function () {
