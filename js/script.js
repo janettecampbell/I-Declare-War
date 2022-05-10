@@ -177,14 +177,24 @@ const winner = () => {
     computerWins(2);
   } else {
     // in event of a tie add 4 cards from each player continue until there is not a tie
+    // declare elements
     const text = document.querySelector(".text");
     const warBtn = document.createElement("button");
+
+    console.log(text);
+    console.log(warBtn);
+    // add class name
     warBtn.className = "war-button";
-    let tieCount = 1;
+
+    // let tieCount = 1;
     console.log("I Declare War");
+
+    // append war button
     text.appendChild(warBtn);
-    warBtn.textContent = "War Button";
-    text.textContent = "I Declare War!!!";
+
+    // add text
+    warBtn.textContent = "I Declare War!!!";
+
     // if (Number(playerCard.value) > Number(computerCard.value)) {
     //   playerWins(8 * tieCount);
     // } else if (Number(computerCard.value) > Number(playerCard.value)) {
@@ -208,7 +218,6 @@ const playBtn = document.querySelector(".play");
 playBtn.addEventListener("click", function () {
   const playerCard = document.querySelector(".player-card");
   const result = playerCard.innerHTML;
-  console.log(result);
   if (result !== "") {
     clear();
     flipCards(0);
