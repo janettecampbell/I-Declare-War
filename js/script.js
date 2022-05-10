@@ -135,6 +135,8 @@ const deckNumberChange = () => {
   playerDeckNum.textContent = playerDeck.length;
   computerDeckNum.textContent = computerDeck.length;
 };
+
+// what to do when player wins
 const playerWins = (cardNum) => {
   const text = document.querySelector(".text");
   console.log("Player wins");
@@ -146,6 +148,7 @@ const playerWins = (cardNum) => {
   console.log(computerDeck);
 };
 
+// what to do when computer wins
 const computerWins = (cardNum) => {
   const text = document.querySelector(".text");
   console.log("Computer wins");
@@ -181,6 +184,9 @@ const winner = () => {
     const text = document.querySelector(".text");
     const warBtn = document.createElement("button");
 
+    // clear text
+    text.removeChild(text.firstChild);
+
     console.log(text);
     console.log(warBtn);
     // add class name
@@ -194,6 +200,8 @@ const winner = () => {
 
     // add text
     warBtn.textContent = "I Declare War!!!";
+
+    // warBtn.addEventListener("click", deal4)
 
     // if (Number(playerCard.value) > Number(computerCard.value)) {
     //   playerWins(8 * tieCount);
