@@ -69,9 +69,9 @@ console.log(playerDeck);
 console.log(computerDeck);
 
 // - Flip cards
-const flipCards = () => {
-  const playerCard = playerDeck[0];
-  const computerCard = computerDeck[0];
+const flipCards = (card) => {
+  const playerCard = playerDeck[card];
+  const computerCard = computerDeck[card];
 
   // declare elements
   const playerCardShow = document.querySelector(".player-card");
@@ -79,16 +79,12 @@ const flipCards = () => {
   const playerImg = document.createElement("img");
   const computerImg = document.createElement("img");
 
+  playerImg.className = "player-img";
+  computerImg.className = "computer-img";
+
   // link images
   playerImg.src = `./images/${playerCard.suit}-${playerCard.value}.png`;
-  //   playerImg.setAttribute(
-  //     "src",
-  //     "./images/${playerCard.suit}-${playerCard.value}.png"
-  //   );
   computerImg.src = `./images/${computerCard.suit}-${computerCard.value}.png`;
-  console.log(playerImg);
-  console.log(computerImg);
-  console.log(playerCardShow);
 
   // show card in page
   playerCardShow.appendChild(playerImg);
@@ -98,25 +94,6 @@ const flipCards = () => {
     `player flips ${playerCard.value}${playerCard.suit} computer flips ${computerCard.value}${computerCard.suit}`
   );
 };
-flipCards();
-
-// put cards back in winners deck in random position
-const placeWinnerCards = (winnerDeck, numOfCards) => {
-  for (let i = 0; i < numOfCards / 2; ++i) {
-    winnerDeck.splice(
-      Math.trunc(Math.random) * winnerDeck.length,
-      0,
-      playerDeck[0]
-    );
-    winnerDeck.splice(
-      Math.trunc(Math.random) * winnerDeck.length,
-      0,
-      computerDeck[0]
-    );
-
-    // const random = winnerDeck[Math.trunc(Math.random() * 26)];
-  }
-};
 
 //remove cards from both decks
 const removeCards = () => {
@@ -124,6 +101,69 @@ const removeCards = () => {
   computerDeck.shift();
 };
 
+// const tie = () => {
+//   const playerTemp = [];
+//   const computerTemp = [];
+//   for (let i = 0; i < 4; ++i) {
+//     playerTemp.push(playerDeck[i]);
+//     playerDeck.shift();
+//   }
+
+//   for (let i = 0; i < 4; ++i) {
+//     computerTemp.push(computerDeck[i]);
+//     computerDeck.shift();
+//   }
+//   const merged = playerTemp.concat(computerTemp);
+// };
+
+// put cards back in winners deck in random position
+const placeWinnerCards = (winnerDeck, numOfCards) => {
+  const random = Math.trunc(Math.random() * winnerDeck.length - 1) + 1;
+  for (let i = 0; i < numOfCards / 2; ++i) {
+    winnerDeck.splice(random, 0, playerDeck[i]);
+    winnerDeck.splice(random, 0, computerDeck[i]);
+    removeCards();
+  }
+};
+
+// changes number shown on deck
+const deckNumberChange = () => {
+  //declare elements
+  const playerDeckNum = document.querySelector(".player-deck-number");
+  const computerDeckNum = document.querySelector(".computer-deck-number");
+
+  playerDeckNum.textContent = playerDeck.length;
+  computerDeckNum.textContent = computerDeck.length;
+};
+const playerWins = (cardNum) => {
+  const text = document.querySelector(".text");
+  console.log("Player wins");
+  text.textContent = "Player Wins";
+  placeWinnerCards(playerDeck, cardNum);
+  deckNumberChange();
+
+  console.log(playerDeck);
+  console.log(computerDeck);
+};
+
+const computerWins = (cardNum) => {
+  const text = document.querySelector(".text");
+  console.log("Computer wins");
+  text.textContent = "Computer Wins";
+  placeWinnerCards(computerDeck, cardNum);
+  deckNumberChange();
+  console.log(playerDeck);
+  console.log(computerDeck);
+};
+
+// clear board
+const clear = () => {
+  const playerCardImg = document.querySelector(".player-card img");
+  const computerCardImg = document.querySelector(".computer-card img");
+
+  playerCardImg.remove();
+  computerCardImg.remove();
+};
 // highest card wins
 const winner = () => {
   const playerCard = playerDeck[0];
@@ -131,32 +171,28 @@ const winner = () => {
   console.log(playerCard);
   console.log(computerCard);
 
-  //declare elements
-  const text = document.querySelector(".text");
-
   if (Number(playerCard.value) > Number(computerCard.value)) {
-    console.log("Player wins");
-    text.textContent = "Player Wins";
-    placeWinnerCards(playerDeck, 2);
-    removeCards();
-    console.log(playerDeck);
-    console.log(computerDeck);
+    playerWins(2);
   } else if (Number(computerCard.value) > Number(playerCard.value)) {
-    console.log("Computer wins");
-    text.textContent = "Computer Wins";
-    placeWinnerCards(computerDeck, 2);
-    removeCards();
-    console.log(playerDeck);
-    console.log(computerDeck);
+    computerWins(2);
   } else {
-    console.log("TBD");
-    text.textContent = "I Declare War!!";
+    // in event of a tie add 4 cards from each player continue until there is not a tie
+    count = 0;
+    while (Number(playerCard.value) === Number(computerCard.value)) {
+    console.log("I Declare War");
+    flipCards(3);
+    removeCards();
+    clear();
+    ++count
+
+    if (Number(playerCard.value) > Number(computerCard.value)) {
+      playerWins(8*count);
+    } else if (Number(computerCard.value) > Number(playerCard.value)) {
+      computerWins(8*count);
+    }
   }
 };
 
-winner();
-
-// in event of a tie add 4 cards from each player continue until there is not a tie
 // winner of tie takes all cards
 // player with all the cards wins
 // If time add images in place of words.
@@ -167,3 +203,18 @@ winner();
 // - When tie pull 4 cards from deck flip top card winner takes all cards
 // - Add cards to winners deck (random positions)
 // - play until one player runs out of cards
+const playBtn = document.querySelector(".play");
+
+playBtn.addEventListener("click", function () {
+  const playerCard = document.querySelector(".player-card");
+  const result = playerCard.innerHTML;
+  console.log(result);
+  if (result !== "") {
+    clear();
+    flipCards(0);
+    winner();
+  } else {
+    flipCards(0);
+    winner();
+  }
+});

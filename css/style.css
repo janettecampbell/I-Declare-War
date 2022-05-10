@@ -15,6 +15,16 @@ img {
   height: auto;
 }
 
+.play {
+  border: none;
+  background-color: #ccd5ae;
+  box-shadow: 5px 7px 18px #888;
+}
+.play:hover {
+  box-shadow: none;
+  background-color: #aed5ae;
+}
+
 .deck-number {
   position: absolute;
   font-size: 11vw;
@@ -44,17 +54,20 @@ img {
 .player {
   grid-area: player;
   text-align: center;
+  font-size: 4vw;
 }
 
 .title {
   grid-area: title;
   text-align: center;
   padding: 30px 0 20px 0;
+  font-size: 3.5vw;
 }
 
 .computer {
   grid-area: computer;
   text-align: center;
+  font-size: 4vw;
 }
 
 .player-deck {
@@ -95,4 +108,5 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 4vw;
 }
