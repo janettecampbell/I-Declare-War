@@ -15,6 +15,17 @@ img {
   height: auto;
 }
 
+.war-button {
+  border: none;
+  background-color: #d47373;
+  box-shadow: 5px 7px 18px #888;
+}
+
+.war-button:hover {
+  background-color: #d55b5b;
+  box-shadow: none;
+}
+
 .play {
   border: none;
   background-color: #ccd5ae;
