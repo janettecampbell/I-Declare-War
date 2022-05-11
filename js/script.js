@@ -6,21 +6,7 @@ play.textContent = "PLAY";
 
 // - Make a 52 card deck
 const suits = ["club", "diamond", "heart", "spade"];
-const values = [
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "11",
-  "12",
-  "13",
-  "14",
-];
+const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
 // creates a dec of cards from variables
 let deck = [];
@@ -156,25 +142,50 @@ const clear = () => {
 // what happens when there's a tie
 const tie = () => {
   let tieCount = 1;
+
   const playerCard = playerDeck[tieCount * 4];
   const computerCard = computerDeck[tieCount * 4];
-
-  // while tied four more cards added to stack
-  // while (Number(playerCard) === Number(computerCard)) {
-  clear();
-  flipCards(tieCount * 4);
-  if (
-    Number(playerCard.value) > Number(computerCard.value) ||
-    computerDeck.length === 0
-  ) {
-    playerWins(16);
-  } else if (
-    Number(computerCard.value) > Number(playerCard.value) ||
-    playerDeck.length === 0
-  ) {
-    computerWins(16);
-  }
-  // ++count;
+  console.log(playerCard);
+  console.log(computerCard);
+  // while tied four more cards per player added to stack
+  do {
+    clear();
+    flipCards(tieCount * 4);
+    if (playerDeck.length < 4) {
+      computerWins(8);
+      break;
+    } else if (computerDeck.length < 4) {
+      computerWins(8);
+      break;
+    }
+    if (playerCard.value > computerCard.value || computerDeck.length === 0) {
+      playerWins(8);
+      break;
+    } else if (
+      computerCard.value > playerCard.value ||
+      playerDeck.length === 0
+    ) {
+      computerWins(8);
+      break;
+    } else {
+      ++tieCount;
+    }
+  } while (playerCard.value === computerCard.value);
+  // {
+  //   clear();
+  //   flipCards(tieCount * 4);
+  //   if (playerCard.value > computerCard.value || computerDeck.length === 0) {
+  //     playerWins(8);
+  //     break;
+  //   } else if (
+  //     computerCard.value > playerCard.value ||
+  //     playerDeck.length === 0
+  //   ) {
+  //     computerWins(8);
+  //     break;
+  //   } else {
+  //     ++tieCount;
+  //   }
   // }
 };
 
@@ -185,10 +196,16 @@ const winner = () => {
   console.log(playerCard);
   console.log(computerCard);
 
-  if (Number(playerCard.value) > Number(computerCard.value)) {
+  if (playerCard.value > computerCard.value) {
     playerWins(2);
-  } else if (Number(computerCard.value) > Number(playerCard.value)) {
+  } else if (computerCard.value > playerCard.value) {
     computerWins(2);
+  } else if (computerDeck.length === 0) {
+    playerWins(2);
+    playing = false;
+  } else if (playerDeck.length === 0) {
+    computerWins(2);
+    playing = false;
   } else {
     // in event of a tie add 4 cards from each player continue until there is not a tie
     // declare elements
@@ -226,13 +243,15 @@ const playBtn = document.querySelector(".play");
 
 playBtn.addEventListener("click", function () {
   const playerCard = document.querySelector(".player-card");
-  const result = playerCard.innerHTML;
-  if (result !== "") {
-    clear();
-    flipCards(0);
-    winner();
-  } else {
-    flipCards(0);
-    winner();
+  if (playing === true) {
+    const result = playerCard.innerHTML;
+    if (result !== "") {
+      clear();
+      flipCards(0);
+      winner();
+    } else {
+      flipCards(0);
+      winner();
+    }
   }
 });
