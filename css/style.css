@@ -19,6 +19,7 @@ img {
   border: none;
   background-color: #d47373;
   box-shadow: 5px 7px 18px #888;
+  font-size: 3vw;
 }
 
 .war-button:hover {
@@ -30,6 +31,7 @@ img {
   border: none;
   background-color: #ccd5ae;
   box-shadow: 5px 7px 18px #888;
+  font-size: 5vw;
 }
 .play:hover {
   box-shadow: none;
