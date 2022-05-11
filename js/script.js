@@ -3,6 +3,8 @@
 // Button text
 const play = document.querySelector(".play");
 play.textContent = "PLAY";
+const reset = document.querySelector(".reset");
+reset.textContent = "RESET";
 
 // - Make a 52 card deck
 const suits = ["club", "diamond", "heart", "spade"];
@@ -171,22 +173,6 @@ const tie = () => {
       ++tieCount;
     }
   } while (playerCard.value === computerCard.value);
-  // {
-  //   clear();
-  //   flipCards(tieCount * 4);
-  //   if (playerCard.value > computerCard.value || computerDeck.length === 0) {
-  //     playerWins(8);
-  //     break;
-  //   } else if (
-  //     computerCard.value > playerCard.value ||
-  //     playerDeck.length === 0
-  //   ) {
-  //     computerWins(8);
-  //     break;
-  //   } else {
-  //     ++tieCount;
-  //   }
-  // }
 };
 
 // highest card wins
@@ -235,11 +221,8 @@ const winner = () => {
   }
 };
 
-// winner of tie takes all cards
-// player with all the cards wins
-// - When tie pull 4 cards from deck flip top card winner takes all cards
-// - Add cards to winners deck (random positions)
 const playBtn = document.querySelector(".play");
+const resetBtn = document.querySelector(".reset");
 
 playBtn.addEventListener("click", function () {
   const playerCard = document.querySelector(".player-card");
@@ -254,4 +237,8 @@ playBtn.addEventListener("click", function () {
       winner();
     }
   }
+});
+
+resetBtn.addEventListener("click", function () {
+  clear();
 });

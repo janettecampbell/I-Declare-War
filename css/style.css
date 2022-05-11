@@ -32,6 +32,7 @@ img {
   background-color: #ccd5ae;
   box-shadow: 5px 7px 18px #888;
   font-size: 5vw;
+  padding: 10px;
 }
 .play:hover {
   box-shadow: none;
@@ -50,18 +51,20 @@ img {
   width: 95vw;
   margin: 0 auto;
   background-color: #faedcd;
+  padding-bottom: 20px;
 }
 
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 0.3fr 0.2fr 2fr;
+  grid-template-rows: 0.3fr 0.2fr 2fr 0.3fr;
   gap: 0.5em 0.5em;
   grid-auto-flow: row;
   grid-template-areas:
     "title title title title title"
     "player player . computer computer"
-    "player-deck player-card text computer-card computer-deck";
+    "player-deck player-card text computer-card computer-deck"
+    ". . reset . .";
 }
 
 .player {
@@ -122,4 +125,18 @@ img {
   justify-content: center;
   align-items: center;
   font-size: 4vw;
+}
+
+.reset {
+  grid-area: reset;
+  border: none;
+  background-color: #ccd5ae;
+  box-shadow: 5px 7px 18px #888;
+  font-size: 5vw;
+  padding: 10px;
+}
+
+.reset:hover {
+  box-shadow: none;
+  background-color: #aed5ae;
 }
