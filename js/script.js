@@ -101,21 +101,6 @@ const removeCards = () => {
   computerDeck.shift();
 };
 
-// const tie = () => {
-//   const playerTemp = [];
-//   const computerTemp = [];
-//   for (let i = 0; i < 4; ++i) {
-//     playerTemp.push(playerDeck[i]);
-//     playerDeck.shift();
-//   }
-
-//   for (let i = 0; i < 4; ++i) {
-//     computerTemp.push(computerDeck[i]);
-//     computerDeck.shift();
-//   }
-//   const merged = playerTemp.concat(computerTemp);
-// };
-
 // put cards back in winners deck in random position
 const placeWinnerCards = (winnerDeck, numOfCards) => {
   const random = Math.trunc(Math.random() * winnerDeck.length - 1) + 1;
@@ -167,6 +152,32 @@ const clear = () => {
   playerCardImg.remove();
   computerCardImg.remove();
 };
+
+// what happens when there's a tie
+const tie = () => {
+  let tieCount = 1;
+  const playerCard = playerDeck[tieCount * 4];
+  const computerCard = computerDeck[tieCount * 4];
+
+  // while tied four more cards added to stack
+  // while (Number(playerCard) === Number(computerCard)) {
+  clear();
+  flipCards(tieCount * 4);
+  if (
+    Number(playerCard.value) > Number(computerCard.value) ||
+    computerDeck.length === 0
+  ) {
+    playerWins(16);
+  } else if (
+    Number(computerCard.value) > Number(playerCard.value) ||
+    playerDeck.length === 0
+  ) {
+    computerWins(16);
+  }
+  // ++count;
+  // }
+};
+
 // highest card wins
 const winner = () => {
   const playerCard = playerDeck[0];
@@ -185,14 +196,15 @@ const winner = () => {
     const warBtn = document.createElement("button");
 
     // clear text
-    text.removeChild(text.firstChild);
+    if (text.innerHTML !== "") {
+      text.removeChild(text.firstChild);
+    }
 
     console.log(text);
     console.log(warBtn);
     // add class name
     warBtn.className = "war-button";
 
-    // let tieCount = 1;
     console.log("I Declare War");
 
     // append war button
@@ -201,19 +213,8 @@ const winner = () => {
     // add text
     warBtn.textContent = "I Declare War!!!";
 
-    // warBtn.addEventListener("click", deal4)
-
-    // if (Number(playerCard.value) > Number(computerCard.value)) {
-    //   playerWins(8 * tieCount);
-    // } else if (Number(computerCard.value) > Number(playerCard.value)) {
-    //   computerWins(8 * tieCount);
-    // } else {
-    //   while (Number(playerCard.value) === Number(computerCard.value)) {
-    //     flipCards(tieCount * 4);
-    //     clear();
-    //     ++tieCount;
-    //   }
-    // }
+    // add button functionality
+    warBtn.addEventListener("click", tie);
   }
 };
 
