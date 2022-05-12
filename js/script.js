@@ -69,6 +69,8 @@ const flipCards = (card) => {
   playFlip();
   const playerCard = playerDeck[card];
   const computerCard = computerDeck[card];
+  console.log(playerCard);
+  console.log(computerCard);
 
   // declare elements
   const playerCardShow = document.querySelector(".player-card");
@@ -146,7 +148,7 @@ const tie = () => {
   const text = document.querySelector(".text");
   let tieCount = 1;
 
-  let cardNum = tieCount * 4;
+  let cardNum = tieCount * 4 - 1;
   const playerCard = playerDeck[cardNum];
   const computerCard = computerDeck[cardNum];
 
@@ -154,8 +156,8 @@ const tie = () => {
   do {
     console.log(tieCount);
     clear();
-    const flipCardsNum = tieCount * 4;
-    console.log(flipCardsNum);
+    // const flipCardsNum = tieCount * 4;
+    console.log(cardNum);
     // player deck has less than 4 cards player looses
     if (playerDeck.length < 4) {
       text.textContent = "Computer Wins";
@@ -170,30 +172,31 @@ const tie = () => {
       console.log(tieCount);
       // const flipCardsNum = tieCount * 4;
       const playerWinsNum = tieCount * 8;
-      console.log(flipCardsNum);
+      console.log(cardNum);
       console.log(playerWinsNum);
-      flipCards(flipCardsNum);
+      flipCards(cardNum);
       playerWins(playerWinsNum);
       break;
     } else if (computerCard.value > playerCard.value) {
       console.log(tieCount);
       // const flipCardsNum = tieCount * 4;
       let computerWinsNum = tieCount * 8;
-      console.log(flipCardsNum);
+      console.log(cardNum);
       console.log(computerWinsNum);
-      flipCards(flipCardsNum);
+      flipCards(cardNum);
       computerWins(computerWinsNum);
       break;
     } else {
+      cardNum = tieCount * 4 - 1;
       ++tieCount;
-      flipCards(flipCardsNum);
+      flipCards(cardNum);
       deckNumberChange();
-      console.log(flipCardsNum);
+      console.log(cardNum);
       console.log(tieCount);
     }
   } while (
     playerCard.value === computerCard.value &&
-    (playerDeck.length > flipCardsNum || computerDeck.length > flipCardsNum)
+    (playerDeck.length >= cardNum || computerDeck.length >= cardNum)
   );
 };
 
