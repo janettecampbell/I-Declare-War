@@ -53,9 +53,20 @@ const dealDecks = () => {
 };
 
 dealDecks();
+console.log(playerDeck);
+console.log(computerDeck);
 
+// play card flip sound
+const playFlip = () => new Audio("./sound/Card-flip-sound-effect.mp3").play();
+
+// pause card flip sound
+const muteFlip = (elem) => {
+  elem.muted = true;
+  elem.pause();
+};
 // - Flip cards
 const flipCards = (card) => {
+  playFlip();
   const playerCard = playerDeck[card];
   const computerCard = computerDeck[card];
 
@@ -90,6 +101,8 @@ const placeWinnerCards = (winnerDeck, numOfCards) => {
     winnerDeck.splice(random, 0, playerDeck[i]);
     winnerDeck.splice(random, 0, computerDeck[i]);
     removeCards();
+    console.log(playerDeck);
+    console.log(computerDeck);
   }
 };
 
@@ -133,12 +146,13 @@ const tie = () => {
   const text = document.querySelector(".text");
   let tieCount = 1;
 
-  const playerCard = playerDeck[tieCount * 4];
-  const computerCard = computerDeck[tieCount * 4];
+  let tieCount1 = tieCount * 4;
+  const playerCard = playerDeck[tieCount1];
+  const computerCard = computerDeck[tieCount1];
 
   // while tied four more cards per player added to stack
   do {
-    console.log(tieCount);
+    console.log(typeof tieCount);
     clear();
     // flipCards(tieCount * 4);
     if (playerDeck.length < 4) {
@@ -150,15 +164,26 @@ const tie = () => {
       playing = false;
       break;
     } else if (playerCard.value > computerCard.value) {
-      flipCards(tieCount * 4);
-      playerWins(8 * tieCount);
+      console.log(tieCount);
+      const flipCardsNum = tieCount * 4;
+      const playerWinsNum = tieCount * 8;
+      console.log(flipCardsNum);
+      console.log(playerWinsNum);
+      flipCards(flipCardsNum);
+      playerWins(playerWinsNum);
       break;
     } else if (computerCard.value > playerCard.value) {
-      flipCards(tieCount * 4);
-      computerWins(8 * tieCount);
+      console.log(tieCount);
+      const flipCardsNum = tieCount * 4;
+      let computerWinsNum = tieCount * 8;
+      console.log(flipCardsNum);
+      console.log(computerWinsNum);
+      flipCards(flipCardsNum);
+      computerWins(computerWinsNum);
       break;
     } else {
       ++tieCount;
+      console.log(tieCount);
     }
   } while (playerCard.value === computerCard.value);
 };
@@ -213,25 +238,29 @@ const playBtn = document.querySelector(".play");
 const resetBtn = document.querySelector(".reset");
 
 playBtn.addEventListener("click", function () {
+  // declare elements
+  const computerCard = document.querySelector(".computer-card");
   const playerCard = document.querySelector(".player-card");
-  if (playing === true) {
-    const result = playerCard.innerHTML;
-    if (result !== "") {
-      clear();
-      flipCards(0);
-      winner();
-    } else {
-      flipCards(0);
-      winner();
-    }
+  const img = playerCard.innerHTML;
+
+  // as long as we are playing and no cards are on the board
+  if (playing === true && img !== "") {
+    clear();
+    flipCards(0);
+    winner();
+  } else {
+    flipCards(0);
+    winner();
   }
 });
 
 resetBtn.addEventListener("click", function () {
+  // declare elements
   const deckNum = document.querySelectorAll(".deck-number");
   const text = document.querySelector(".text");
   const playerCard = document.querySelector(".player-card");
   const result = playerCard.innerHTML;
+  // played card area isn't blank
   if (result !== "") {
     clear();
     deck = [];

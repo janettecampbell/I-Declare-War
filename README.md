@@ -22,6 +22,9 @@ I started by trying to break the project into smaller pieces.
 
 ## Unsolved Problems
 
+After a I declare war card placement I have the same card in both decks.
+Have not added card flip sound to the game.
+
 ## Link to Hosted Site
 
 https://potstickernut.github.io/I-Declare-War/
