@@ -146,26 +146,29 @@ const tie = () => {
   const text = document.querySelector(".text");
   let tieCount = 1;
 
-  let tieCount1 = tieCount * 4;
-  const playerCard = playerDeck[tieCount1];
-  const computerCard = computerDeck[tieCount1];
+  let cardNum = tieCount * 4;
+  const playerCard = playerDeck[cardNum];
+  const computerCard = computerDeck[cardNum];
 
   // while tied four more cards per player added to stack
   do {
-    console.log(typeof tieCount);
+    console.log(tieCount);
     clear();
-    // flipCards(tieCount * 4);
+    const flipCardsNum = tieCount * 4;
+    console.log(flipCardsNum);
+    // player deck has less than 4 cards player looses
     if (playerDeck.length < 4) {
       text.textContent = "Computer Wins";
       playing = false;
       break;
+      // computer deck has less than 4 cards computer looses
     } else if (computerDeck.length < 4) {
       text.textContent = "Player Wins";
       playing = false;
       break;
     } else if (playerCard.value > computerCard.value) {
       console.log(tieCount);
-      const flipCardsNum = tieCount * 4;
+      // const flipCardsNum = tieCount * 4;
       const playerWinsNum = tieCount * 8;
       console.log(flipCardsNum);
       console.log(playerWinsNum);
@@ -174,7 +177,7 @@ const tie = () => {
       break;
     } else if (computerCard.value > playerCard.value) {
       console.log(tieCount);
-      const flipCardsNum = tieCount * 4;
+      // const flipCardsNum = tieCount * 4;
       let computerWinsNum = tieCount * 8;
       console.log(flipCardsNum);
       console.log(computerWinsNum);
@@ -183,9 +186,15 @@ const tie = () => {
       break;
     } else {
       ++tieCount;
+      flipCards(flipCardsNum);
+      deckNumberChange();
+      console.log(flipCardsNum);
       console.log(tieCount);
     }
-  } while (playerCard.value === computerCard.value);
+  } while (
+    playerCard.value === computerCard.value &&
+    (playerDeck.length > flipCardsNum || computerDeck.length > flipCardsNum)
+  );
 };
 
 // highest card wins
