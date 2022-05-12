@@ -39,12 +39,12 @@ const shuffle = (deck) => {
 //get deck of cards
 getDeck();
 shuffle(deck);
-console.log(deck);
+
 // Decide to split deck or give each player a full deck and remove randomly pulled card from both decks
 let playerDeck;
 let computerDeck;
 let currentCard;
-const playing = true;
+let playing = true;
 
 // - Split the deck into 26 cards.
 const dealDecks = () => {
@@ -53,8 +53,6 @@ const dealDecks = () => {
 };
 
 dealDecks();
-console.log(playerDeck);
-console.log(computerDeck);
 
 // - Flip cards
 const flipCards = (card) => {
@@ -77,10 +75,6 @@ const flipCards = (card) => {
   // show card in page
   playerCardShow.appendChild(playerImg);
   computerCardShow.appendChild(computerImg);
-
-  console.log(
-    `player flips ${playerCard.value}${playerCard.suit} computer flips ${computerCard.value}${computerCard.suit}`
-  );
 };
 
 //remove cards from both decks
@@ -112,24 +106,17 @@ const deckNumberChange = () => {
 // what to do when player wins
 const playerWins = (cardNum) => {
   const text = document.querySelector(".text");
-  console.log("Player wins");
   text.textContent = "Player Wins";
   placeWinnerCards(playerDeck, cardNum);
   deckNumberChange();
-
-  console.log(playerDeck);
-  console.log(computerDeck);
 };
 
 // what to do when computer wins
 const computerWins = (cardNum) => {
   const text = document.querySelector(".text");
-  console.log("Computer wins");
   text.textContent = "Computer Wins";
   placeWinnerCards(computerDeck, cardNum);
   deckNumberChange();
-  console.log(playerDeck);
-  console.log(computerDeck);
 };
 
 // clear board
@@ -143,31 +130,32 @@ const clear = () => {
 
 // what happens when there's a tie
 const tie = () => {
+  const text = document.querySelector(".text");
   let tieCount = 1;
 
   const playerCard = playerDeck[tieCount * 4];
   const computerCard = computerDeck[tieCount * 4];
-  console.log(playerCard);
-  console.log(computerCard);
+
   // while tied four more cards per player added to stack
   do {
+    console.log(tieCount);
     clear();
-    flipCards(tieCount * 4);
+    // flipCards(tieCount * 4);
     if (playerDeck.length < 4) {
-      computerWins(8);
+      text.textContent = "Computer Wins";
+      playing = false;
       break;
     } else if (computerDeck.length < 4) {
-      computerWins(8);
+      text.textContent = "Player Wins";
+      playing = false;
       break;
-    }
-    if (playerCard.value > computerCard.value || computerDeck.length === 0) {
-      playerWins(8);
+    } else if (playerCard.value > computerCard.value) {
+      flipCards(tieCount * 4);
+      playerWins(8 * tieCount);
       break;
-    } else if (
-      computerCard.value > playerCard.value ||
-      playerDeck.length === 0
-    ) {
-      computerWins(8);
+    } else if (computerCard.value > playerCard.value) {
+      flipCards(tieCount * 4);
+      computerWins(8 * tieCount);
       break;
     } else {
       ++tieCount;
@@ -179,8 +167,6 @@ const tie = () => {
 const winner = () => {
   const playerCard = playerDeck[0];
   const computerCard = computerDeck[0];
-  console.log(playerCard);
-  console.log(computerCard);
 
   if (playerCard.value > computerCard.value) {
     playerWins(2);
@@ -203,12 +189,8 @@ const winner = () => {
       text.removeChild(text.firstChild);
     }
 
-    console.log(text);
-    console.log(warBtn);
     // add class name
     warBtn.className = "war-button";
-
-    console.log("I Declare War");
 
     // append war button
     text.appendChild(warBtn);
@@ -219,6 +201,12 @@ const winner = () => {
     // add button functionality
     warBtn.addEventListener("click", tie);
   }
+};
+
+const resetFunc = () => {
+  clear();
+  getDeck();
+  shuffle(deck);
 };
 
 const playBtn = document.querySelector(".play");
@@ -240,5 +228,30 @@ playBtn.addEventListener("click", function () {
 });
 
 resetBtn.addEventListener("click", function () {
-  clear();
+  const deckNum = document.querySelectorAll(".deck-number");
+  const text = document.querySelector(".text");
+  const playerCard = document.querySelector(".player-card");
+  const result = playerCard.innerHTML;
+  if (result !== "") {
+    clear();
+    deck = [];
+    getDeck();
+    shuffle(deck);
+    dealDecks();
+    deckNum.forEach((num) => {
+      num.textContent = 26;
+      playing = true;
+    });
+    text.textContent = "";
+  } else {
+    deck = [];
+    getDeck();
+    shuffle(deck);
+    dealDecks();
+    deckNum.forEach((num) => {
+      num.textContent = 26;
+    });
+    text.textContent = "";
+    playing = true;
+  }
 });
