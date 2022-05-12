@@ -78,6 +78,7 @@ const flipCards = (card) => {
   const playerImg = document.createElement("img");
   const computerImg = document.createElement("img");
 
+  // add classes to images
   playerImg.className = "player-img";
   computerImg.className = "computer-img";
 
@@ -148,51 +149,55 @@ const tie = () => {
   const text = document.querySelector(".text");
   let tieCount = 1;
 
-  let cardNum = tieCount * 4 - 1;
+  let cardNum = tieCount * 4;
   const playerCard = playerDeck[cardNum];
   const computerCard = computerDeck[cardNum];
+  console.log(playerCard);
+  console.log(computerCard);
 
   // while tied four more cards per player added to stack
+
   do {
-    console.log(tieCount);
     clear();
-    // const flipCardsNum = tieCount * 4;
-    console.log(cardNum);
+
     // player deck has less than 4 cards player looses
     if (playerDeck.length < 4) {
       text.textContent = "Computer Wins";
       playing = false;
       break;
+
       // computer deck has less than 4 cards computer looses
     } else if (computerDeck.length < 4) {
       text.textContent = "Player Wins";
       playing = false;
       break;
+
+      // player has higher card player wins
     } else if (playerCard.value > computerCard.value) {
       console.log(tieCount);
-      // const flipCardsNum = tieCount * 4;
       const playerWinsNum = tieCount * 8;
       console.log(cardNum);
       console.log(playerWinsNum);
       flipCards(cardNum);
       playerWins(playerWinsNum);
       break;
+
+      // computer has higher card computer wins
     } else if (computerCard.value > playerCard.value) {
       console.log(tieCount);
-      // const flipCardsNum = tieCount * 4;
-      let computerWinsNum = tieCount * 8;
+      const computerWinsNum = tieCount * 8;
       console.log(cardNum);
       console.log(computerWinsNum);
       flipCards(cardNum);
       computerWins(computerWinsNum);
       break;
     } else {
-      cardNum = tieCount * 4 - 1;
+      // cardNum = tieCount * 4 - 1;
       ++tieCount;
       flipCards(cardNum);
-      deckNumberChange();
-      console.log(cardNum);
-      console.log(tieCount);
+      console.log(playerCard);
+      console.log(computerCard);
+      // break;
     }
   } while (
     playerCard.value === computerCard.value &&
@@ -251,16 +256,16 @@ const resetBtn = document.querySelector(".reset");
 
 playBtn.addEventListener("click", function () {
   // declare elements
-  const computerCard = document.querySelector(".computer-card");
   const playerCard = document.querySelector(".player-card");
   const img = playerCard.innerHTML;
 
-  // as long as we are playing and no cards are on the board
+  // as long as we are playing
   if (playing === true && img !== "") {
     clear();
     flipCards(0);
     winner();
   } else {
+    // if there are no cards on the board
     flipCards(0);
     winner();
   }
