@@ -1,9 +1,24 @@
 "use strict";
 
-// Button text
+// declare elements
+const playerCardShow = document.querySelector(".player-card");
+const computerCardShow = document.querySelector(".computer-card");
+const playerImg = document.createElement("img");
+const computerImg = document.createElement("img");
 const play = document.querySelector(".play");
-play.textContent = "PLAY";
 const reset = document.querySelector(".reset");
+const text = document.querySelector(".text");
+const warBtn = document.createElement("button");
+const deckNum = document.querySelectorAll(".deck-number");
+
+// declare variables
+let playerDeck;
+let computerDeck;
+let currentCard;
+let playing = true;
+
+// Button text
+play.textContent = "PLAY";
 reset.textContent = "RESET";
 
 // - Make a 52 card deck
@@ -36,40 +51,28 @@ const shuffle = (deck) => {
   }
 };
 
-//get deck of cards
-getDeck();
-shuffle(deck);
-
-// Decide to split deck or give each player a full deck and remove randomly pulled card from both decks
-let playerDeck;
-let computerDeck;
-let currentCard;
-let playing = true;
-
 // - Split the deck into 26 cards.
 const dealDecks = () => {
   playerDeck = deck.slice(0, 26);
   computerDeck = deck.slice(26);
 };
 
-dealDecks();
-
-// play card flip sound
-const playFlip = () => {
-  new Audio("./sound/Card-flip-sound-effect.mp3").play();
+//get and deal deck of cards
+const deckPrep = () => {
+  getDeck();
+  shuffle(deck);
+  dealDecks();
 };
+deckPrep();
 
-// - Flip cards
+// Flip cards in position of 'card'
 const flipCards = (card) => {
-  playFlip();
+  // add flip sound
+  new Audio("./sound/Card-flip-sound-effect.mp3").play();
+
+  // select card from deck
   const playerCard = playerDeck[card];
   const computerCard = computerDeck[card];
-
-  // declare elements
-  const playerCardShow = document.querySelector(".player-card");
-  const computerCardShow = document.querySelector(".computer-card");
-  const playerImg = document.createElement("img");
-  const computerImg = document.createElement("img");
 
   // add classes to images
   playerImg.className = "player-img";
@@ -79,15 +82,9 @@ const flipCards = (card) => {
   playerImg.src = `./images/${playerCard.suit}-${playerCard.value}.png`;
   computerImg.src = `./images/${computerCard.suit}-${computerCard.value}.png`;
 
-  // show card in page
+  // show card image in page
   playerCardShow.appendChild(playerImg);
   computerCardShow.appendChild(computerImg);
-};
-
-//remove cards from both decks
-const removeCards = () => {
-  playerDeck.shift();
-  computerDeck.shift();
 };
 
 // put cards back in winners deck in random position
@@ -96,7 +93,8 @@ const placeWinnerCards = (winnerDeck, numOfCards) => {
   for (let i = 0; i < numOfCards / 2; ++i) {
     winnerDeck.splice(random, 0, playerDeck[0]);
     winnerDeck.splice(random, 0, computerDeck[0]);
-    removeCards();
+    playerDeck.shift();
+    computerDeck.shift();
   }
 };
 
@@ -112,7 +110,6 @@ const deckNumberChange = () => {
 
 // what to do when player wins
 const playerWins = (cardNum) => {
-  const text = document.querySelector(".text");
   text.textContent = "Player Wins";
   placeWinnerCards(playerDeck, cardNum);
   deckNumberChange();
@@ -120,7 +117,6 @@ const playerWins = (cardNum) => {
 
 // what to do when computer wins
 const computerWins = (cardNum) => {
-  const text = document.querySelector(".text");
   text.textContent = "Computer Wins";
   placeWinnerCards(computerDeck, cardNum);
   deckNumberChange();
@@ -137,7 +133,6 @@ const clear = () => {
 
 // what happens when there's a tie
 const tie = () => {
-  const text = document.querySelector(".text");
   let tieCount = 0;
 
   let cardNum = tieCount * 4;
@@ -199,9 +194,6 @@ const tie = () => {
 
 // highest card wins
 const winner = () => {
-  // declare elements
-  const text = document.querySelector(".text");
-
   // declare variables
   const playerCard = playerDeck[0];
   const computerCard = computerDeck[0];
@@ -220,7 +212,6 @@ const winner = () => {
   } else {
     // in event of a tie add 4 cards from each player continue until there is not a tie
     // declare elements
-    const warBtn = document.createElement("button");
 
     // clear text
     if (text.innerHTML !== "") {
@@ -241,23 +232,42 @@ const winner = () => {
   }
 };
 
+// when reset button is clicked
 const resetFunc = () => {
-  clear();
-  getDeck();
-  shuffle(deck);
+  // declare elements
+  const result = playerCardShow.innerHTML;
+
+  // if played card area isn't blank
+  if (result !== "") {
+    clear();
+    deck = [];
+    deckPrep();
+    deckNum.forEach((num) => {
+      num.textContent = 26;
+      playing = true;
+    });
+    text.textContent = "";
+    // if played card area is blank
+  } else {
+    deck = [];
+    deckPrep();
+    deckNum.forEach((num) => {
+      num.textContent = 26;
+    });
+    text.textContent = "";
+    playing = true;
+  }
 };
 
-const playBtn = document.querySelector(".play");
-const resetBtn = document.querySelector(".reset");
-
-playBtn.addEventListener("click", function () {
+// when play button is clicked
+const playFunc = () => {
   // declare elements
   const playerCard = document.querySelector(".player-card");
   const img = playerCard.innerHTML;
-  const warBtn = document.querySelector(".war-button");
+  const warBtnSelect = document.querySelector(".war-button");
 
   // if war button doesn't exist
-  if (typeof warBtn === "object" && warBtn === null) {
+  if (typeof warBtnSelect === "object" && warBtnSelect === null) {
     // as long as we are playing
     if (playing === true && img !== "") {
       clear();
@@ -269,35 +279,7 @@ playBtn.addEventListener("click", function () {
       winner();
     }
   }
-});
+};
 
-resetBtn.addEventListener("click", function () {
-  // declare elements
-  const deckNum = document.querySelectorAll(".deck-number");
-  const text = document.querySelector(".text");
-  const playerCard = document.querySelector(".player-card");
-  const result = playerCard.innerHTML;
-  // played card area isn't blank
-  if (result !== "") {
-    clear();
-    deck = [];
-    getDeck();
-    shuffle(deck);
-    dealDecks();
-    deckNum.forEach((num) => {
-      num.textContent = 26;
-      playing = true;
-    });
-    text.textContent = "";
-  } else {
-    deck = [];
-    getDeck();
-    shuffle(deck);
-    dealDecks();
-    deckNum.forEach((num) => {
-      num.textContent = 26;
-    });
-    text.textContent = "";
-    playing = true;
-  }
-});
+play.addEventListener("click", playFunc);
+reset.addEventListener("click", resetFunc);
