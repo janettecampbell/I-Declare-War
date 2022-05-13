@@ -86,17 +86,21 @@ const flipCards = (card) => {
 
 //remove cards from both decks
 const removeCards = () => {
-  playerDeck.shift();
-  computerDeck.shift();
+  const show = playerDeck.shift();
+  const show2 = computerDeck.shift();
+  console.log(show);
+  console.log(show2);
 };
 
 // put cards back in winners deck in random position
 const placeWinnerCards = (winnerDeck, numOfCards) => {
   const random = Math.trunc(Math.random() * winnerDeck.length - 1) + 1;
   for (let i = 0; i < numOfCards / 2; ++i) {
-    winnerDeck.splice(random, 0, playerDeck[i]);
-    winnerDeck.splice(random, 0, computerDeck[i]);
+    winnerDeck.splice(random, 0, playerDeck[0]);
+    winnerDeck.splice(random, 0, computerDeck[0]);
     removeCards();
+    console.log(playerDeck);
+    console.log(computerDeck);
   }
 };
 
@@ -158,10 +162,10 @@ const tie = () => {
 
     // if player runs out of cards
     if (computerCard === undefined) {
-      text.textContent = "Player Wins";
+      text.textContent = "Player Wins Game";
       playing = false;
     } else if (playerCard === undefined) {
-      text.textContent = "Computer Wins";
+      text.textContent = "Computer Wins Game";
       playing = false;
     }
     flipCards(cardNum);
@@ -169,13 +173,13 @@ const tie = () => {
 
   // player deck has less than 4 cards player looses
   if (playerDeck.length < 4) {
-    text.textContent = "Computer Wins";
+    text.textContent = "Computer Wins Game";
     playing = false;
     // break;
 
     // computer deck has less than 4 cards computer looses
   } else if (computerDeck.length < 4) {
-    text.textContent = "Player Wins";
+    text.textContent = "Player Wins Game";
     playing = false;
     // break;
 
@@ -199,14 +203,19 @@ const tie = () => {
 
 // highest card wins
 const winner = () => {
+  // declare elements
+  const text = document.querySelector(".text");
+
+  // declare variables
   const playerCard = playerDeck[0];
   const computerCard = computerDeck[0];
 
+  // if deck length = 0
   if (computerDeck.length === 0) {
-    playerWins(2);
+    text.textContent = "Player Wins Game";
     playing = false;
   } else if (playerDeck.length === 0) {
-    computerWins(2);
+    text.textContent = "Computer Wins Game";
     playing = false;
   } else if (playerCard.value > computerCard.value) {
     playerWins(2);
@@ -215,7 +224,6 @@ const winner = () => {
   } else {
     // in event of a tie add 4 cards from each player continue until there is not a tie
     // declare elements
-    const text = document.querySelector(".text");
     const warBtn = document.createElement("button");
 
     // clear text
