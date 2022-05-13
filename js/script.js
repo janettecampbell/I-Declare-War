@@ -10,6 +10,8 @@ const reset = document.querySelector(".reset");
 const text = document.querySelector(".text");
 const warBtn = document.createElement("button");
 const deckNum = document.querySelectorAll(".deck-number");
+const playerDeckNum = document.querySelector(".player-deck-number");
+const computerDeckNum = document.querySelector(".computer-deck-number");
 
 // declare variables
 let playerDeck;
@@ -38,16 +40,16 @@ const getDeck = () => {
 };
 
 // - Shuffle the deck
-const shuffle = (deck) => {
+const shuffle = (deck1) => {
   // for 1000 turns
   // switch the values of two random cards
   for (let i = 0; i < 1000; ++i) {
-    let location1 = Math.trunc(Math.random() * deck.length);
-    let location2 = Math.trunc(Math.random() * deck.length);
-    let holding = deck[location1];
+    let location1 = Math.trunc(Math.random() * deck1.length);
+    let location2 = Math.trunc(Math.random() * deck1.length);
+    let holding = deck1[location1];
 
-    deck[location1] = deck[location2];
-    deck[location2] = holding;
+    deck1[location1] = deck1[location2];
+    deck1[location2] = holding;
   }
 };
 
@@ -101,8 +103,6 @@ const placeWinnerCards = (winnerDeck, numOfCards) => {
 // changes number shown on deck
 const deckNumberChange = () => {
   //declare elements
-  const playerDeckNum = document.querySelector(".player-deck-number");
-  const computerDeckNum = document.querySelector(".computer-deck-number");
 
   playerDeckNum.textContent = playerDeck.length;
   computerDeckNum.textContent = computerDeck.length;
