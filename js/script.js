@@ -61,11 +61,6 @@ const playFlip = () => {
   new Audio("./sound/Card-flip-sound-effect.mp3").play();
 };
 
-// pause card flip sound
-const muteFlip = (elem) => {
-  elem.muted = true;
-  elem.pause();
-};
 // - Flip cards
 const flipCards = (card) => {
   playFlip();
@@ -172,6 +167,13 @@ const tie = () => {
     console.log(playerCard);
     console.log(computerCard);
     console.log(cardNum);
+    if (computerCard === undefined) {
+      text.textContent = "Player Wins";
+      playing = false;
+    } else if (playerCard === undefined) {
+      text.textContent = "Computer Wins";
+      playing = false;
+    }
     flipCards(cardNum);
     console.log(playerCard);
     console.log(computerCard);
@@ -219,16 +221,16 @@ const winner = () => {
   const playerCard = playerDeck[0];
   const computerCard = computerDeck[0];
 
-  if (playerCard.value > computerCard.value) {
-    playerWins(2);
-  } else if (computerCard.value > playerCard.value) {
-    computerWins(2);
-  } else if (computerDeck.length === 0) {
+  if (computerDeck.length === 0) {
     playerWins(2);
     playing = false;
   } else if (playerDeck.length === 0) {
     computerWins(2);
     playing = false;
+  } else if (playerCard.value > computerCard.value) {
+    playerWins(2);
+  } else if (computerCard.value > playerCard.value) {
+    computerWins(2);
   } else {
     // in event of a tie add 4 cards from each player continue until there is not a tie
     // declare elements
@@ -267,16 +269,20 @@ playBtn.addEventListener("click", function () {
   // declare elements
   const playerCard = document.querySelector(".player-card");
   const img = playerCard.innerHTML;
+  const warBtn = document.querySelector(".war-button");
 
-  // as long as we are playing
-  if (playing === true && img !== "") {
-    clear();
-    flipCards(0);
-    winner();
-  } else {
-    // if there are no cards on the board
-    flipCards(0);
-    winner();
+  // if war button doesn't exist
+  if (typeof warBtn === "object" && warBtn === null) {
+    // as long as we are playing
+    if (playing === true && img !== "") {
+      clear();
+      flipCards(0);
+      winner();
+    } else if (playing === true) {
+      // if there are no cards on the board
+      flipCards(0);
+      winner();
+    }
   }
 });
 
