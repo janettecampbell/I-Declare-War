@@ -53,8 +53,6 @@ const dealDecks = () => {
 };
 
 dealDecks();
-console.log(playerDeck);
-console.log(computerDeck);
 
 // play card flip sound
 const playFlip = () => {
@@ -66,8 +64,6 @@ const flipCards = (card) => {
   playFlip();
   const playerCard = playerDeck[card];
   const computerCard = computerDeck[card];
-  console.log(playerCard);
-  console.log(computerCard);
 
   // declare elements
   const playerCardShow = document.querySelector(".player-card");
@@ -101,8 +97,6 @@ const placeWinnerCards = (winnerDeck, numOfCards) => {
     winnerDeck.splice(random, 0, playerDeck[i]);
     winnerDeck.splice(random, 0, computerDeck[i]);
     removeCards();
-    console.log(playerDeck);
-    console.log(computerDeck);
   }
 };
 
@@ -151,8 +145,6 @@ const tie = () => {
   // while tied four more cards per player added to stack
   let playerCard = playerDeck[cardNum];
   let computerCard = computerDeck[cardNum];
-  console.log(playerCard);
-  console.log(computerCard);
 
   while (
     playerCard.value === computerCard.value &&
@@ -163,10 +155,8 @@ const tie = () => {
     cardNum = tieCount * 4;
     playerCard = playerDeck[cardNum];
     computerCard = computerDeck[cardNum];
-    console.log(tieCount);
-    console.log(playerCard);
-    console.log(computerCard);
-    console.log(cardNum);
+
+    // if player runs out of cards
     if (computerCard === undefined) {
       text.textContent = "Player Wins";
       playing = false;
@@ -175,8 +165,6 @@ const tie = () => {
       playing = false;
     }
     flipCards(cardNum);
-    console.log(playerCard);
-    console.log(computerCard);
   }
 
   // player deck has less than 4 cards player looses
@@ -193,10 +181,7 @@ const tie = () => {
 
     // player has higher card player wins
   } else if (playerCard.value > computerCard.value) {
-    console.log(tieCount);
     const playerWinsNum = tieCount * 8;
-    console.log(cardNum);
-    console.log(playerWinsNum);
     clear();
     flipCards(cardNum);
     playerWins(playerWinsNum);
@@ -204,16 +189,12 @@ const tie = () => {
 
     // computer has higher card computer wins
   } else if (computerCard.value > playerCard.value) {
-    console.log(tieCount);
     const computerWinsNum = tieCount * 8;
-    console.log(cardNum);
-    console.log(computerWinsNum);
     clear();
     flipCards(cardNum);
     computerWins(computerWinsNum);
     // break;
   }
-  console.log("outside loop");
 };
 
 // highest card wins
