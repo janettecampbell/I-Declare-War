@@ -22,8 +22,7 @@ I started by trying to break the project into smaller pieces.
 
 ## Unsolved Problems
 
-After a I declare war card placement I have the same card in both decks.
-Have not added card flip sound to the game.
+Add "I declare war button for each tie"
 
 ## Link to Hosted Site
 
