@@ -86,10 +86,8 @@ const flipCards = (card) => {
 
 //remove cards from both decks
 const removeCards = () => {
-  const show = playerDeck.shift();
-  const show2 = computerDeck.shift();
-  console.log(show);
-  console.log(show2);
+  playerDeck.shift();
+  computerDeck.shift();
 };
 
 // put cards back in winners deck in random position
@@ -99,8 +97,6 @@ const placeWinnerCards = (winnerDeck, numOfCards) => {
     winnerDeck.splice(random, 0, playerDeck[0]);
     winnerDeck.splice(random, 0, computerDeck[0]);
     removeCards();
-    console.log(playerDeck);
-    console.log(computerDeck);
   }
 };
 
