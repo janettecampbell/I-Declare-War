@@ -48,10 +48,14 @@ img {
 }
 
 .main-wrapper {
-  width: 95vw;
+  width: 90vw;
   margin: 0 auto;
   background-color: #faedcd;
   padding-bottom: 20px;
+}
+
+.back-card {
+  box-shadow: 5px 5px 7px #888;
 }
 
 .container {
