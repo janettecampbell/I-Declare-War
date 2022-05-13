@@ -162,10 +162,10 @@ const tie = () => {
 
     // if player runs out of cards
     if (computerCard === undefined) {
-      text.textContent = "Player Wins Game";
+      text.textContent = "Player Wins";
       playing = false;
     } else if (playerCard === undefined) {
-      text.textContent = "Computer Wins Game";
+      text.textContent = "Computer Wins";
       playing = false;
     }
     flipCards(cardNum);
@@ -173,13 +173,13 @@ const tie = () => {
 
   // player deck has less than 4 cards player looses
   if (playerDeck.length < 4) {
-    text.textContent = "Computer Wins Game";
+    text.textContent = "Computer Wins";
     playing = false;
     // break;
 
     // computer deck has less than 4 cards computer looses
   } else if (computerDeck.length < 4) {
-    text.textContent = "Player Wins Game";
+    text.textContent = "Player Wins";
     playing = false;
     // break;
 
@@ -212,10 +212,10 @@ const winner = () => {
 
   // if deck length = 0
   if (computerDeck.length === 0) {
-    text.textContent = "Player Wins Game";
+    text.textContent = "Player Wins";
     playing = false;
   } else if (playerDeck.length === 0) {
-    text.textContent = "Computer Wins Game";
+    text.textContent = "Computer Wins";
     playing = false;
   } else if (playerCard.value > computerCard.value) {
     playerWins(2);
