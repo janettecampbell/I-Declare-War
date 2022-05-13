@@ -22,7 +22,7 @@ I started by trying to break the project into smaller pieces.
 
 ## Unsolved Problems
 
-Add "I declare war button for each tie"
+Add pause to see each tie
 
 ## Link to Hosted Site
 
