@@ -41,19 +41,23 @@ const getDeck = () => {
 
 // - Shuffle the deck
 const shuffle = (deck1) => {
+  new Audio("./sound/630498__jimbo555__shuffling-cards.wav").play();
   // for 1000 turns
   // switch the values of two random cards
   for (let i = 0; i < 1000; ++i) {
+    // randomly select location
     let location1 = Math.trunc(Math.random() * deck1.length);
     let location2 = Math.trunc(Math.random() * deck1.length);
+    // place 1st card in holding
     let holding = deck1[location1];
-
+    // put card 2 in place of card 1
     deck1[location1] = deck1[location2];
+    // put card 1 in place of card 2
     deck1[location2] = holding;
   }
 };
 
-// - Split the deck into 26 cards.
+// Split the deck into 26 cards.
 const dealDecks = () => {
   playerDeck = deck.slice(0, 26);
   computerDeck = deck.slice(26);
@@ -70,7 +74,7 @@ deckPrep();
 // Flip cards in position of 'card'
 const flipCards = (card) => {
   // add flip sound
-  new Audio("./sound/Card-flip-sound-effect.mp3").play();
+  new Audio("./sound/240776__f4ngy__card-flip.wav").play();
 
   // select card from deck
   const playerCard = playerDeck[card];
@@ -91,6 +95,8 @@ const flipCards = (card) => {
 
 // put cards back in winners deck in random position
 const placeWinnerCards = (winnerDeck, numOfCards) => {
+  // random number between winning deck length and 1
+  // didn't want to include 0 because that's the card being played
   const random = Math.trunc(Math.random() * winnerDeck.length - 1) + 1;
   for (let i = 0; i < numOfCards / 2; ++i) {
     winnerDeck.splice(random, 0, playerDeck[0]);
