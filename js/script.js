@@ -171,13 +171,11 @@ const tie = () => {
   if (playerDeck.length < 4) {
     text.textContent = "Computer Wins";
     playing = false;
-    // break;
 
     // computer deck has less than 4 cards player wins
   } else if (computerDeck.length < 4) {
     text.textContent = "Player Wins";
     playing = false;
-    // break;
 
     // player has higher card player wins
   } else if (playerCard.value > computerCard.value) {
@@ -185,7 +183,6 @@ const tie = () => {
     clear();
     flipCards(cardNum);
     playerWins(playerWinsNum);
-    // break;
 
     // computer has higher card computer wins
   } else if (computerCard.value > playerCard.value) {
@@ -193,7 +190,6 @@ const tie = () => {
     clear();
     flipCards(cardNum);
     computerWins(computerWinsNum);
-    // break;
   }
 };
 
@@ -203,15 +199,16 @@ const winner = () => {
   const playerCard = playerDeck[0];
   const computerCard = computerDeck[0];
 
-  // if player / computer runs out of cards
-  if (computerDeck.length === 0) {
-    text.textContent = "Player Wins";
-    playing = false;
-  } else if (playerDeck.length === 0) {
-    text.textContent = "Computer Wins";
-    playing = false;
-    // if player / computer cards are higher
-  } else if (playerCard.value > computerCard.value) {
+  // // if player / computer runs out of cards
+  // if (computerDeck.length === 0) {
+  //   text.textContent = "Player Wins";
+  //   playing = false;
+  // } else if (playerDeck.length === 0) {
+  //   text.textContent = "Computer Wins";
+  //   playing = false;
+  // } else
+  // if player / computer cards are higher
+  if (playerCard.value > computerCard.value) {
     playerWins(2);
   } else if (computerCard.value > playerCard.value) {
     computerWins(2);
@@ -272,9 +269,19 @@ const playFunc = () => {
   const img = playerCard.innerHTML;
   const warBtnSelect = document.querySelector(".war-button");
 
+  // if player / computer runs out of cards
+  if (computerDeck.length === 0) {
+    text.textContent = "Player Wins";
+    playing = false;
+  } else if (playerDeck.length === 0) {
+    text.textContent = "Computer Wins";
+    playing = false;
+  }
+
   // if war button doesn't exist
   if (typeof warBtnSelect === "object" && warBtnSelect === null) {
     // as long as we are playing
+    // there are cards on the board
     if (playing === true && img !== "") {
       clear();
       flipCards(0);
