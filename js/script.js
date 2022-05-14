@@ -41,7 +41,6 @@ const getDeck = () => {
 
 // - Shuffle the deck
 const shuffle = (deck1) => {
-  new Audio("./sound/630498__jimbo555__shuffling-cards.wav").play();
   // for 1000 turns
   // switch the values of two random cards
   for (let i = 0; i < 1000; ++i) {
@@ -163,8 +162,9 @@ const tie = () => {
     } else if (playerCard === undefined) {
       text.textContent = "Computer Wins";
       playing = false;
+    } else {
+      flipCards(cardNum);
     }
-    flipCards(cardNum);
   }
 
   // player deck has less than 4 cards computer wins
