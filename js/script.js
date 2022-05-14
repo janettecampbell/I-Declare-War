@@ -80,11 +80,11 @@ const flipCards = (card) => {
   const playerCard = playerDeck[card];
   const computerCard = computerDeck[card];
 
-  // add classes to images
+  // add class names to images
   playerImg.className = "player-img";
   computerImg.className = "computer-img";
 
-  // link images
+  // link images to each players card
   playerImg.src = `./images/${playerCard.suit}-${playerCard.value}.png`;
   computerImg.src = `./images/${computerCard.suit}-${computerCard.value}.png`;
 
@@ -108,8 +108,6 @@ const placeWinnerCards = (winnerDeck, numOfCards) => {
 
 // changes number shown on deck
 const deckNumberChange = () => {
-  //declare elements
-
   playerDeckNum.textContent = playerDeck.length;
   computerDeckNum.textContent = computerDeck.length;
 };
@@ -128,7 +126,7 @@ const computerWins = (cardNum) => {
   deckNumberChange();
 };
 
-// clear board
+// clear board of card images
 const clear = () => {
   const playerCardImg = document.querySelector(".player-card img");
   const computerCardImg = document.querySelector(".computer-card img");
@@ -147,6 +145,7 @@ const tie = () => {
   let playerCard = playerDeck[cardNum];
   let computerCard = computerDeck[cardNum];
 
+  // while cards are tied and players have enough cards in deck
   while (
     playerCard.value === computerCard.value &&
     (playerDeck.length >= cardNum || computerDeck.length >= cardNum)
@@ -168,13 +167,13 @@ const tie = () => {
     flipCards(cardNum);
   }
 
-  // player deck has less than 4 cards player looses
+  // player deck has less than 4 cards computer wins
   if (playerDeck.length < 4) {
     text.textContent = "Computer Wins";
     playing = false;
     // break;
 
-    // computer deck has less than 4 cards computer looses
+    // computer deck has less than 4 cards player wins
   } else if (computerDeck.length < 4) {
     text.textContent = "Player Wins";
     playing = false;
@@ -198,19 +197,20 @@ const tie = () => {
   }
 };
 
-// highest card wins
+// when not a tie / highest card wins
 const winner = () => {
   // declare variables
   const playerCard = playerDeck[0];
   const computerCard = computerDeck[0];
 
-  // if deck length = 0
+  // if player / computer runs out of cards
   if (computerDeck.length === 0) {
     text.textContent = "Player Wins";
     playing = false;
   } else if (playerDeck.length === 0) {
     text.textContent = "Computer Wins";
     playing = false;
+    // if player / computer cards are higher
   } else if (playerCard.value > computerCard.value) {
     playerWins(2);
   } else if (computerCard.value > playerCard.value) {
@@ -224,7 +224,7 @@ const winner = () => {
       text.removeChild(text.firstChild);
     }
 
-    // add class name
+    // add class name to war button
     warBtn.className = "war-button";
 
     // append war button
@@ -240,7 +240,7 @@ const winner = () => {
 
 // when reset button is clicked
 const resetFunc = () => {
-  // declare elements
+  // played card area
   const result = playerCardShow.innerHTML;
 
   // if played card area isn't blank
@@ -250,8 +250,8 @@ const resetFunc = () => {
     deckPrep();
     deckNum.forEach((num) => {
       num.textContent = 26;
-      playing = true;
     });
+    playing = true;
     text.textContent = "";
     // if played card area is blank
   } else {
