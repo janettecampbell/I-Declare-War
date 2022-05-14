@@ -40,7 +40,6 @@ I started by trying to break the project into smaller pieces.
 
 ## Unsolved Problems
 
-- Keeps trying to read suit after game is over
 - Add pause to see each tie
 - Add flip animation
 

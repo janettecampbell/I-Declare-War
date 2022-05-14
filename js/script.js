@@ -144,8 +144,12 @@ const tie = () => {
   let playerCard = playerDeck[cardNum];
   let computerCard = computerDeck[cardNum];
 
+  // if player / computer card has a value
+
   // while cards are tied and players have enough cards in deck
   while (
+    playerCard !== undefined &&
+    computerCard !== undefined &&
     playerCard.value === computerCard.value &&
     (playerDeck.length >= cardNum || computerDeck.length >= cardNum)
   ) {
@@ -157,10 +161,10 @@ const tie = () => {
 
     // if player runs out of cards
     if (computerCard === undefined) {
-      text.textContent = "Player Wins";
+      text.textContent = "Player Wins Game";
       playing = false;
     } else if (playerCard === undefined) {
-      text.textContent = "Computer Wins";
+      text.textContent = "Computer Wins Game";
       playing = false;
     } else {
       flipCards(cardNum);
@@ -169,12 +173,12 @@ const tie = () => {
 
   // player deck has less than 4 cards computer wins
   if (playerDeck.length < 4) {
-    text.textContent = "Computer Wins";
+    text.textContent = "Computer Wins Game";
     playing = false;
 
     // computer deck has less than 4 cards player wins
   } else if (computerDeck.length < 4) {
-    text.textContent = "Player Wins";
+    text.textContent = "Player Wins Game";
     playing = false;
 
     // player has higher card player wins
@@ -198,15 +202,6 @@ const winner = () => {
   // declare variables
   const playerCard = playerDeck[0];
   const computerCard = computerDeck[0];
-
-  // // if player / computer runs out of cards
-  // if (computerDeck.length === 0) {
-  //   text.textContent = "Player Wins";
-  //   playing = false;
-  // } else if (playerDeck.length === 0) {
-  //   text.textContent = "Computer Wins";
-  //   playing = false;
-  // } else
   // if player / computer cards are higher
   if (playerCard.value > computerCard.value) {
     playerWins(2);
@@ -214,9 +209,7 @@ const winner = () => {
     computerWins(2);
   } else {
     // in event of a tie add 4 cards from each player continue until there is not a tie
-    // declare elements
-
-    // clear text
+    // clear text from center box
     if (text.innerHTML !== "") {
       text.removeChild(text.firstChild);
     }
@@ -271,10 +264,10 @@ const playFunc = () => {
 
   // if player / computer runs out of cards
   if (computerDeck.length === 0) {
-    text.textContent = "Player Wins";
+    text.textContent = "Player Wins Game";
     playing = false;
   } else if (playerDeck.length === 0) {
-    text.textContent = "Computer Wins";
+    text.textContent = "Computer Wins Game";
     playing = false;
   }
 
