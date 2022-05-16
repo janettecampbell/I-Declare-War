@@ -50,3 +50,12 @@ https://potstickernut.github.io/I-Declare-War/
 ## Installation Instructions
 
 No installation needed
+
+## Instructions
+
+1. Click "PLAY" to flip cards
+2. Higher card wins
+3. Incase of tie click "I Declare War!!!" button
+4. 4 cards per tie will be added to winners stack
+5. Repeat until one player runs out of cards
+6. To play again click "RESET"
