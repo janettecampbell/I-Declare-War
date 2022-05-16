@@ -2,7 +2,7 @@
 
 ## Wireframe
 
-![alt text](https://github.com/PotstickerNut/I-Declare-War/blob/main/images/wireframe.jpg?raw=true)
+![wireframe](https://github.com/PotstickerNut/I-Declare-War/blob/main/images/wireframe.jpg?raw=true)
 
 ## Explanations of specific Technologies
 
