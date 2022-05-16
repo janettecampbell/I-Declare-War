@@ -55,7 +55,8 @@ No installation needed
 
 1. Click "PLAY" to flip cards
 2. Higher card wins
-3. Incase of tie click "I Declare War!!!" button
-4. 4 cards per tie will be added to winners stack
-5. Repeat until one player runs out of cards
-6. To play again click "RESET"
+3. Continue to click "PLAY" until there is a tie.
+4. Incase of tie click "I Declare War!!!" button
+5. 4 cards per tie will be added to winners stack
+6. Repeat until one player runs out of cards
+7. To play again click "RESET"
