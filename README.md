@@ -45,7 +45,7 @@ I started by trying to break the project into smaller pieces.
 
 ## Link to Hosted Site
 
-https://potstickernut.github.io/I-Declare-War/
+https://janettecampbell.github.io/I-Declare-War/
 
 ## Installation Instructions
 
